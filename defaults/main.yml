@@ -7,7 +7,8 @@
 #   - bar
 #   - baz
 # @end
-krew_general_packages: []
+krew_general_packages:
+  - git
 
 # @var krew_extra_packages:description: List of extra packages
 # @var krew_extra_packages:example: >
