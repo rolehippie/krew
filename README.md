@@ -85,7 +85,8 @@ List of general packages
 #### Default value
 
 ```YAML
-krew_general_packages: []
+krew_general_packages:
+  - git
 ```
 
 #### Example usage
