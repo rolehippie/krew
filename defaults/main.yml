@@ -1,0 +1,64 @@
+# Standards: 1.2
+---
+# @var krew_general_packages:description: List of general packages
+# @var krew_general_packages:example: >
+# krew_general_packages:
+#   - foo
+#   - bar
+#   - baz
+# @end
+krew_general_packages: []
+
+# @var krew_extra_packages:description: List of extra packages
+# @var krew_extra_packages:example: >
+# krew_extra_packages:
+#   - foo
+#   - bar
+#   - baz
+# @end
+krew_extra_packages: []
+
+# @var krew_release_version:description: Version of krew to install
+# renovate: datasource=github-releases depName=kubernetes-sigs/krew
+krew_release_version: 0.4.3
+
+# @var krew_release_arch:description: Architecture for krew
+krew_release_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
+
+# @var krew_release_download:description: URL to download krew from
+krew_release_download: "https://github.com/kubernetes-sigs/krew/releases/download/v{{ krew_release_version }}/krew-linux_{{ krew_release_arch }}.tar.gz"
+
+# @var krew_install_path:description: Path to install krew files into
+krew_install_path: /usr/share/krew
+
+# @var krew_general_plugins:description: List of general plugins
+# @var krew_general_plugins:example: >
+# krew_general_plugins:
+#   - plugin1
+#   - plugin2
+#   - name: plugin3
+#     state: absent
+# @end
+krew_general_plugins:
+  - images
+  - ktop
+  - neat
+  - oidc-login
+  - oomd
+  - pexec
+  - realname-diff
+  - resource-versions
+  - view-secret
+  - whoami
+
+# @var krew_extra_plugins:description: List of extra plugins
+# @var krew_extra_plugins:example: >
+# krew_extra_plugins:
+#   - plugin1
+#   - plugin2
+#   - name: plugin3
+#     state: absent
+# @end
+krew_extra_plugins: []
+
+...

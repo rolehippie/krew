@@ -1,0 +1,111 @@
+# Standards: 1.2
+---
+- name: Install required packages
+  loop: "{{ krew_general_packages + krew_extra_packages }}"
+  package:
+    name: "{{ item }}"
+    state: present
+  tags:
+    - krew
+
+- name: Check existing version
+  register: krew_release_version_check
+  failed_when: False
+  changed_when: False
+  check_mode: False
+  shell: /usr/bin/kubectl-krew version | grep GitTag
+  tags:
+    - krew
+
+- name: Fact version change
+  set_fact:
+    krew_release_version_changed: "{{ krew_release_version_check.rc != 0 or (krew_release_version_check.stdout is defined and krew_release_version not in krew_release_version_check.stdout) | bool }}"
+  tags:
+    - krew
+
+- name: Download release tarball
+  when:
+    - krew_release_version_changed
+  unarchive:
+    src: "{{ krew_release_download }}"
+    dest: /usr/local/src
+    exclude:
+      - LICENSE
+    remote_src: True
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - krew
+
+- name: Copy release binary
+  when:
+    - krew_release_version_changed
+    - not ansible_check_mode
+  copy:
+    src: "/usr/local/src/krew-linux_{{ krew_release_arch }}"
+    dest: /usr/bin/kubectl-krew
+    remote_src: True
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - krew
+
+- name: Remove downloaded file
+  file:
+    path: "/usr/local/src/krew-linux_{{ krew_release_arch }}"
+    state: absent
+  tags:
+    - krew
+
+- name: Initialize krew index
+  command:
+    cmd: /usr/bin/kubectl-krew update
+    creates: "{{ krew_install_path }}/index/default/plugins"
+  environment:
+    KREW_ROOT: "{{ krew_install_path }}"
+  tags:
+    - krew
+
+- name: Install defines plugins
+  register: krew_plugin_install
+  failed_when: krew_plugin_install.rc != 0
+  changed_when: "'You installed plugin' in krew_plugin_install.stderr"
+  loop: "{{ krew_general_plugins + krew_extra_plugins }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  when:
+    - item.state | default('present') == 'present'
+  command: "/usr/bin/kubectl-krew install {{ item.name | default(item) }}"
+  environment:
+    KREW_ROOT: "{{ krew_install_path }}"
+  tags:
+    - krew
+
+- name: Remove defined Plugins
+  register: krew_plugin_remove
+  failed_when: "krew_plugin_remove.rc != 0 and 'plugin is not installed' not in krew_plugin_remove.stderr"
+  changed_when: "'Uninstalled plugin' in krew_plugin_remove.stderr"
+  loop: "{{ krew_general_plugins + krew_extra_plugins }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  when:
+    - item.state | default('present') == 'absent'
+  command: "/usr/bin/kubectl-krew uninstall {{ item.name | default(item) }}"
+  environment:
+    KREW_ROOT: "{{ krew_install_path }}"
+  tags:
+    - krew
+
+- name: Write profile script
+  template:
+    src: profile.j2
+    dest: /etc/profile.d/krew.sh
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - krew
+
+...
