@@ -98,6 +98,16 @@
   tags:
     - krew
 
+- name: Fix store perms
+  file:
+    path: "{{ krew_install_path }}/store"
+    owner: root
+    group: root
+    mode: u=rwX,g=rX,o=rX
+    recurse: True
+  tags:
+    - krew
+
 - name: Write profile script
   template:
     src: profile.j2
