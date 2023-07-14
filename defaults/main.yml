@@ -21,7 +21,7 @@ krew_extra_packages: []
 
 # @var krew_release_version:description: Version of krew to install
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
-krew_release_version: 0.4.3
+krew_release_version: 0.4.4
 
 # @var krew_release_arch:description: Architecture for krew
 krew_release_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
