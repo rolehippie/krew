@@ -1,7 +1,7 @@
 ---
 - name: Install required packages
   loop: "{{ krew_general_packages + krew_extra_packages }}"
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   tags:
@@ -12,12 +12,12 @@
   failed_when: False
   changed_when: False
   check_mode: False
-  shell: /usr/bin/kubectl-krew version | grep GitTag
+  ansible.builtin.shell: /usr/bin/kubectl-krew version | grep GitTag
   tags:
     - krew
 
 - name: Fact version change
-  set_fact:
+  ansible.builtin.set_fact:
     krew_release_version_changed: "{{ krew_release_version_check.rc != 0 or (krew_release_version_check.stdout is defined and krew_release_version not in krew_release_version_check.stdout) | bool }}"
   tags:
     - krew
@@ -25,7 +25,7 @@
 - name: Download release tarball
   when:
     - krew_release_version_changed
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ krew_release_download }}"
     dest: /usr/local/src
     exclude:
@@ -41,7 +41,7 @@
   when:
     - krew_release_version_changed
     - not ansible_check_mode
-  copy:
+  ansible.builtin.copy:
     src: "/usr/local/src/krew-linux_{{ krew_release_arch }}"
     dest: /usr/bin/kubectl-krew
     remote_src: True
@@ -52,14 +52,14 @@
     - krew
 
 - name: Remove downloaded file
-  file:
+  ansible.builtin.file:
     path: "/usr/local/src/krew-linux_{{ krew_release_arch }}"
     state: absent
   tags:
     - krew
 
 - name: Initialize krew index
-  command:
+  ansible.builtin.command:
     cmd: /usr/bin/kubectl-krew update
     creates: "{{ krew_install_path }}/index/default/plugins"
   environment:
@@ -76,7 +76,7 @@
     label: "{{ item.name | default(item) }}"
   when:
     - item.state | default('present') == 'present'
-  command: "/usr/bin/kubectl-krew install {{ item.name | default(item) }}"
+  ansible.builtin.command: "/usr/bin/kubectl-krew install {{ item.name | default(item) }}"
   environment:
     KREW_ROOT: "{{ krew_install_path }}"
   tags:
@@ -91,14 +91,14 @@
     label: "{{ item.name | default(item) }}"
   when:
     - item.state | default('present') == 'absent'
-  command: "/usr/bin/kubectl-krew uninstall {{ item.name | default(item) }}"
+  ansible.builtin.command: "/usr/bin/kubectl-krew uninstall {{ item.name | default(item) }}"
   environment:
     KREW_ROOT: "{{ krew_install_path }}"
   tags:
     - krew
 
 - name: Fix store perms
-  file:
+  ansible.builtin.file:
     path: "{{ krew_install_path }}/store"
     owner: root
     group: root
@@ -108,7 +108,7 @@
     - krew
 
 - name: Write profile script
-  template:
+  ansible.builtin.template:
     src: profile.j2
     dest: /etc/profile.d/krew.sh
     owner: root
