@@ -1,4 +1,3 @@
-# Standards: 1.2
 ---
 # @var krew_general_packages:description: List of general packages
 # @var krew_general_packages:example: >
