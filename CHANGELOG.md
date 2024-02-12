@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0](https://github.com/rolehippie/krew/compare/v1.0.2...v2.0.0) (2024-02-12)
+
+
+### Features
+
+* used full qualified collection names ([048fc84](https://github.com/rolehippie/krew/commit/048fc84f07a51bf11c98cfb599b4277ac1cf0a8e))
+
 ## [1.0.2](https://github.com/rolehippie/krew/compare/v1.0.1...v1.0.2) (2023-07-17)
 
 
