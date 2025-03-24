@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/rolehippie/krew/compare/v2.0.0...v2.0.1) (2025-03-24)
+
+
+### Bugfixes
+
+* **deps:** update dependency kubernetes-sigs/krew to v0.4.5 ([#20](https://github.com/rolehippie/krew/issues/20)) ([086defc](https://github.com/rolehippie/krew/commit/086defce54ac63adcee6e59e39a14de52f8c187a))
+
 ## [2.0.0](https://github.com/rolehippie/krew/compare/v1.0.2...v2.0.0) (2024-02-12)
 
 
