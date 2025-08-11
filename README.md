@@ -1,4 +1,4 @@
-# krew
+# workspace
 
 [![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/krew)
 [![General Workflow](https://github.com/rolehippie/krew/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/krew/actions/workflows/general.yml)
@@ -154,7 +154,8 @@ URL to download krew from
 #### Default value
 
 ```YAML
-krew_release_download: https://github.com/kubernetes-sigs/krew/releases/download/v{{
+krew_release_download: 
+  https://github.com/kubernetes-sigs/krew/releases/download/v{{ 
   krew_release_version }}/krew-linux_{{ krew_release_arch }}.tar.gz
 ```
 
@@ -171,7 +172,6 @@ krew_release_version: 0.4.5
 ## Discovered Tags
 
 **_krew_**
-
 
 ## Dependencies
 
