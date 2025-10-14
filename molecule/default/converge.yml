@@ -1,6 +1,11 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    krew_general_plugins:
+      - images
+      - oidc-login
+      - whoami
   roles:
     - role: rolehippie.krew
 

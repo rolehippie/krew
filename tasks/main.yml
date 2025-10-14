@@ -9,10 +9,10 @@
 
 - name: Check existing version
   register: krew_release_version_check
-  failed_when: False
-  changed_when: False
-  check_mode: False
-  ansible.builtin.shell: /usr/bin/kubectl-krew version | grep GitTag
+  failed_when: false
+  changed_when: false
+  check_mode: false
+  ansible.builtin.shell: /usr/bin/kubectl-krew version 2>&1
   tags:
     - krew
 
@@ -30,7 +30,7 @@
     dest: /usr/local/src
     exclude:
       - LICENSE
-    remote_src: True
+    remote_src: true
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
@@ -44,7 +44,7 @@
   ansible.builtin.copy:
     src: "/usr/local/src/krew-linux_{{ krew_release_arch }}"
     dest: /usr/bin/kubectl-krew
-    remote_src: True
+    remote_src: true
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
@@ -75,7 +75,7 @@
   loop_control:
     label: "{{ item.name | default(item) }}"
   when:
-    - item.state | default('present') == 'present'
+    - true if item.state is not defined else item.state == 'present'
   ansible.builtin.command: "/usr/bin/kubectl-krew install {{ item.name | default(item) }}"
   environment:
     KREW_ROOT: "{{ krew_install_path }}"
@@ -90,7 +90,7 @@
   loop_control:
     label: "{{ item.name | default(item) }}"
   when:
-    - item.state | default('present') == 'absent'
+    - false if item.state is not defined else item.state == 'absent'
   ansible.builtin.command: "/usr/bin/kubectl-krew uninstall {{ item.name | default(item) }}"
   environment:
     KREW_ROOT: "{{ krew_install_path }}"
@@ -103,7 +103,7 @@
     owner: root
     group: root
     mode: u=rwX,g=rX,o=rX
-    recurse: True
+    recurse: true
   tags:
     - krew
 
