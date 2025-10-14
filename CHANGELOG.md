@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/rolehippie/krew/compare/v2.0.1...v2.1.0) (2025-10-14)
+
+
+### Features
+
+* apply new repo structure and update linting ([c3e0ea2](https://github.com/rolehippie/krew/commit/c3e0ea28b41877fbf4eda53ff3402d39f9062725))
+
 ## [2.0.1](https://github.com/rolehippie/krew/compare/v2.0.0...v2.0.1) (2025-03-24)
 
 
