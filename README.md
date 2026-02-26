@@ -167,7 +167,7 @@ Version of krew to install
 #### Default value
 
 ```YAML
-krew_release_version: 0.4.5
+krew_release_version: 0.5.0
 ```
 
 ## Discovered Tags
