@@ -144,8 +144,7 @@ Architecture for krew
 #### Default value
 
 ```YAML
-krew_release_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' or ansible_architecture
-  == 'arm64' else 'amd64' }}"
+krew_release_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' or ansible_architecture == 'arm64' else 'amd64' }}"
 ```
 
 ### krew_release_download
@@ -155,9 +154,7 @@ URL to download krew from
 #### Default value
 
 ```YAML
-krew_release_download: 
-  https://github.com/kubernetes-sigs/krew/releases/download/v{{ 
-  krew_release_version }}/krew-linux_{{ krew_release_arch }}.tar.gz
+krew_release_download: https://github.com/kubernetes-sigs/krew/releases/download/v{{ krew_release_version }}/krew-linux_{{ krew_release_arch }}.tar.gz
 ```
 
 ### krew_release_version
