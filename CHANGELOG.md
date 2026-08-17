@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.5.0](https://github.com/rolehippie/krew/compare/v2.4.0...v2.5.0) (2026-08-17)
+
+### Dependencies
+
+* **minor:** update dependency pipx:ansible-lint to v26.8.0 ([#56](https://github.com/rolehippie/krew/issues/56)) ([7d95b23](https://github.com/rolehippie/krew/commit/7d95b235736bd71e8dd108fe3e10cb81335d4d9e))
+* **minor:** update dependency pipx:molecule to v26.8.0 ([#57](https://github.com/rolehippie/krew/issues/57)) ([294de6f](https://github.com/rolehippie/krew/commit/294de6feb03de8ddcdddb5927e5e64eecb7c5db9))
+* **patch:** update dependency pipx:ansible-core to v2.21.3 ([#54](https://github.com/rolehippie/krew/issues/54)) ([4e33f2e](https://github.com/rolehippie/krew/commit/4e33f2ef9c3ab3e6220fca286751468c30012694))
+* **patch:** update dependency pre-commit to v4.6.2 ([#55](https://github.com/rolehippie/krew/issues/55)) ([529f4d6](https://github.com/rolehippie/krew/commit/529f4d63e6d7c9b2abe822a429980947cfae1f7b))
+
 ## [2.4.0](https://github.com/rolehippie/krew/compare/v2.3.0...v2.4.0) (2026-08-10)
 
 ### Dependencies
