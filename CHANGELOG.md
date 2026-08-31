@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.5.1](https://github.com/rolehippie/krew/compare/v2.5.0...v2.5.1) (2026-08-31)
+
+### Dependencies
+
+* **patch:** update dependency pipx:ansible-doctor to v8.4.1 ([#58](https://github.com/rolehippie/krew/issues/58)) ([342f289](https://github.com/rolehippie/krew/commit/342f289ea48df2088772f51a6a2215350f58af81))
+
 ## [2.5.0](https://github.com/rolehippie/krew/compare/v2.4.0...v2.5.0) (2026-08-17)
 
 ### Dependencies
