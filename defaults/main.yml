@@ -23,7 +23,7 @@ krew_extra_packages: []
 krew_release_version: 0.5.0
 
 # @var krew_release_arch:description: Architecture for krew
-krew_release_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' or ansible_architecture == 'arm64' else 'amd64' }}"
+krew_release_arch: "{{ 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else 'amd64' }}"
 
 # @var krew_release_download:description: URL to download krew from
 krew_release_download: "https://github.com/kubernetes-sigs/krew/releases/download/v{{ krew_release_version }}/krew-linux_{{ krew_release_arch }}.tar.gz"
