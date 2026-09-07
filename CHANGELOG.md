@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/rolehippie/krew/compare/v2.5.1...v2.6.0) (2026-09-07)
+
+### Features
+
+* add separate requirements for molecule run ([196a3d2](https://github.com/rolehippie/krew/commit/196a3d2b39d8547e0c79d9ff6c905081d2d65add))
+* use new required facts as attributes ([9abae7d](https://github.com/rolehippie/krew/commit/9abae7d0d5320fe71e30e4ec765516129482607e))
+
 ## [2.5.1](https://github.com/rolehippie/krew/compare/v2.5.0...v2.5.1) (2026-08-31)
 
 ### Dependencies
